@@ -1,1 +1,33 @@
 ﻿@page "/"
+@using WeatherForecast.Models
+@inject IJSRuntime js
+
+@if (pos == null)
+{
+    <p><em>@message</em></p>
+} 
+else
+{
+    <h2>Latitude: @pos.Latitude, Longitude: @pos.Longitude</h2>
+}
+@code {
+    string message = "Loading...";
+    Position pos;
+
+    private async Task GetPosition()
+    {
+        pos = await js.InvokeAsync<Position>("bweInterop.getPosition");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            await GetPosition();
+        }
+        catch (Exception)
+        {
+            message = "Geolocation is not supported.";
+        };
+    }
+}
