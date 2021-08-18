@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+/// <summary>
+/// Class to capture and organize results from OpenWeather One Call API
+/// </summary>
+
 namespace WeatherForecast.Models
 {
     public class OpenWeather
